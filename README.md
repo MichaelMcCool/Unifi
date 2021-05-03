@@ -1,2 +1,2 @@
-# Unifi
-Unifi Controller API for PowerShell
+# Unifi-PS-Module
+PowerShell Module for Unifi Controller

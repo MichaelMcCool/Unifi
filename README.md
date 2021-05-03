@@ -104,6 +104,10 @@ List all available commands
 
 # Contributions
 Feel free to send pull requests or submit issues when you encounter them.
+### Help needed!
+The way the site settings are stored in the controller database, the settings themselves aren't present until they are actually used. I could not determine all possible settings, just the ones that were configured in my environment. I have made a test tool to go through and evaluate all existing sites and their settings and it will list any settings that have not already been accounted for. Please run this tool on your environment and report any new settings it finds. Thanks!
+
+    Test-UnifiSiteKnownSetting
 
 # Future Plans
 

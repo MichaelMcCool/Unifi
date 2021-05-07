@@ -5,7 +5,7 @@
     RootModule = 'Unifi.psm1'
     
     # Version number of this module.
-    ModuleVersion = '1.0'
+    ModuleVersion = '1.0.1'
     
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -144,7 +144,7 @@
              ProjectUri = 'https://github.com/MichaelMcCool/Unifi'
     
             # A URL to an icon representing this module.
-            IconUri = ''
+            IconUri = 'https://github.com/MichaelMcCool/Unifi/blob/main/ubiquiti_icon.png'
     
             # ReleaseNotes of this module
             ReleaseNotes = 'This module allows for management of Unifi Controllers using PowerShell. This is the initial release.'

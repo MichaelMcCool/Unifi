@@ -1,4 +1,4 @@
-function Get-UnifiSiteDevice { 
+function Get-UnifiSiteDevice {
     [CmdletBinding(DefaultParameterSetName = 'Basic')]
     param (
         [Parameter(ParameterSetName="Detailed", Position = 0, Mandatory = $true, ValueFromPipeline = $true)]

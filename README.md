@@ -75,6 +75,10 @@ Retrieve a list of all administrator accounts
 Retrieve a list of all administrators for a specific site
 
     Get-UnifiSiteAdmin -name <site name>
+    
+Retrieve a list of all site devices
+
+    Get-UnifiSiteDevice -name <site name>
 
 Reboot a device
 

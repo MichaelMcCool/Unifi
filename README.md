@@ -27,6 +27,7 @@ The following code will provide the necessary data and commands to setup the con
     
     import-module Unifi
     
+    # If connecting to a UDMPro, add '-UDMPro' to the following line.
     Connect-UnifiController -ControllerURL $Controller -credentials $Credentials
 
 *Note: After the initial connection, the module will automatically refresh the connection as needed.*

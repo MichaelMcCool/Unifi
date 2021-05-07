@@ -49,10 +49,12 @@ function Get-UnifiSiteDevice {
        
         # The detailed results are missing the 'disabled' property, so the basic info is not a subset of the detailed info.
         # Add the 'disabled' property to the deatiled device information.
-        write-verbose "Adding missing property `'disabled`' to detailed device information."
+        write-verbose "Adding missing property `'disabled`' to detailed device information if needed."
         foreach ($entry in $DeviceDetailed){
-            $Basic=$DeviceBasic | Where-Object {$_.mac -eq $entry.mac}
-            $entry | Add-Member -MemberType NoteProperty -name 'disabled' -value $Basic.disabled
+            if ([bool]($entry.PSObject.Properties.name -match 'disabled') -eq $false){
+                $Basic=$DeviceBasic | Where-Object {$_.mac -eq $entry.mac}
+                $entry | Add-Member -MemberType NoteProperty -name 'disabled' -value $Basic.disabled
+            }
         }
         $DeviceDetailed
     }

@@ -22,6 +22,7 @@ function Test-UnifiSiteKnownSetting {
         "snmp",
         "super_cloudaccess",
         "super_events",
+        "super_fingerbank",
         "super_identity",
         "super_mail",
         "super_mgmt",

@@ -24,6 +24,7 @@ function Set-UnifiSiteSetting {
             "super_cloudaccess",
             "super_events",
             "super_fingerbank",
+            "super_fwupdate",
             "super_identity",
             "super_mail",
             "super_mgmt",

@@ -30,10 +30,10 @@ function Connect-UnifiController {
         $results = Invoke-Restmethod -Uri $LoginURI -method post -body $body -ContentType "application/json; charset=utf-8"  -SessionVariable myWebSession
         if ($results.meta.rc -eq "ok") {
             if (!$refresh){
-                write-host "Successfully connected to Unifi controller."
+                Write-Verbose "Successfully connected to Unifi controller."
             }
             else {
-                Write-Verbose "Successfully connect to Unifi controller."
+                Write-Verbose "Successfully reconnected to Unifi controller."
             }
         # Set this as a script variable as it will be used for all other commands in the module.
         $Script:Session = $MyWebSession

@@ -54,7 +54,6 @@ function Get-UnifiProductList {
         $Data.substring($start,$Rellength)
     }
 
-    #https://66.128.105.82:8443/manage/angular/gf2f1a60/js/app.js
     $ControllerName=Get-UnifiControllerName
     $URI = "$controller/manage/angular/$ControllerName/js/app.js"
     $WebResults=(Invoke-GetRestAPICall $URI)
@@ -62,7 +61,7 @@ function Get-UnifiProductList {
     $Webresults | out-file -FilePath "$env:TEMP\Webresults.txt"
 
     $FullRegex='(?<={1:\[function\(e,t,n\)\{t\.exports=\{).*(?=,\{\}\],2:\[function\(e,t,n\))'
-    $TempData = Get-content .\temp.txt  -raw 
+    $TempData = Get-content "$env:TEMP\webresults.txt"  -raw 
     Remove-Item -Path "$env:TEMP\Webresults.txt"
     [void]($tempData -match $FullRegex)
     $DataToParse=$Matches.0

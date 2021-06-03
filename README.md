@@ -1,7 +1,7 @@
 # Unifi
 This module is designed to provide programmatic access to the various commands and functions in the Unifi controller module via powershell. 
 The functions here are based on information from the [Ubiquiti Community Wiki](https://ubntwiki.com/products/software/unifi-controller/api) along with reverse engineering the controller's web UI. 
-## Installation instrcutions
+## Installation instructions
     install-module Unifi
 ## Usage
 To get started with using the module and connecting to the controller, you will need an administrator account on the Unifi controller. 

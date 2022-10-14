@@ -8,6 +8,8 @@ function Set-UnifiSiteSetting {
             "country",
             "dpi",
             "element_adopt",
+            "global_ap",
+            "global_switch",
             "guest_access",
             "ips",
             "lcm",
@@ -30,6 +32,7 @@ function Set-UnifiSiteSetting {
             "super_mgmt",
             "super_sdn",
             "super_smtp",
+            "teleport",
             "usg",
             "usw"
         )]
@@ -84,10 +87,10 @@ function Set-UnifiSiteSetting {
         Short name for the site. This is the 'name' value from the Get-UnifiSite command.
 
         .PARAMETER Setting
-        The site setting section to update. Valid options are auto_speedtest, connectivity, country, dpi, element_adopt, guest_access, ips, 
-        lcm, locale, mgmt, network_optimization, ntp, porta, provider_capabilities, radio_ai, radius, rsyslogd, snmp, super_cloudaccess, 
-        super_events, super_identity, super_mail, super_mgmt, super_sdn, super_smtp, usg, and usw. These are further limited to only settings
-        that currently exist when running the Get-UnifiSiteSetting command for the specified site.
+        The site setting section to update. Valid options are auto_speedtest, connectivity, country, dpi, element_adopt, guest_access, global_ap, 
+        global_switch, ips, lcm, locale, mgmt, network_optimization, ntp, porta, provider_capabilities, radio_ai, radius, rsyslogd, snmp, 
+        super_cloudaccess, super_events, super_identity, super_mail, super_mgmt, super_sdn, super_smtp, teleport, usg, and usw. These are further 
+        limited to only settings that currently exist when running the Get-UnifiSiteSetting command for the specified site.
 
         To check for currently unsupported options, please run the Test-UnifiSiteKnownSetting command. If this test script finds any additional values,
         please inform the module author so these can be added.

@@ -7,6 +7,8 @@ function Test-UnifiSiteKnownSetting {
         "country",
         "dpi",
         "element_adopt",
+        "global_ap",
+        "global_switch",
         "guest_access",
         "ips",
         "lcm",
@@ -29,6 +31,7 @@ function Test-UnifiSiteKnownSetting {
         "super_mgmt",
         "super_sdn",
         "super_smtp",
+        "teleport",
         "usg",
         "usw"
     )

@@ -26,8 +26,15 @@ function Connect-UnifiController {
     }
     $body = New-UnifiCommand $params
     
+    if ($null -eq $Script:Session){
+        write-verbose "Creating new Session object."
+        $Script:Session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+    }
+    $Domain=([System.Uri]$Script:controller).host
+    write-verbose "Domain is $Domain."
     try {
-        $results = Invoke-Restmethod -Uri $LoginURI -method post -body $body -ContentType "application/json; charset=utf-8"  -SessionVariable myWebSession
+        $results = Invoke-Restmethod -Uri $LoginURI -method post -body $body -ContentType "application/json; charset=utf-8"  -WebSession $Script:Session -TimeoutSec 600
+        write-verbose $Script:Session.Cookies
         if ($results.meta.rc -eq "ok") {
             if (!$refresh){
                 Write-Verbose "Successfully connected to Unifi controller."
@@ -36,13 +43,54 @@ function Connect-UnifiController {
                 Write-Verbose "Successfully reconnected to Unifi controller."
             }
         # Set this as a script variable as it will be used for all other commands in the module.
-        $Script:Session = $MyWebSession
+        
+
         }
     }
     catch {
-        $APIerror = "API Connection Error: $($_.Exception.Message)"
-        $APIerror
+        $ErrorResponse=$_.errordetails.Message | ConvertFrom-Json
+        # The 2FA Session cookie is created as part of the response details from a failed initial logon. 
+        # Add this to the session data.
+        if (($ErrorResponse.data.mfa_cookie) -and (($Script:session.Cookies.GetCookies("https://$Domain")).name -notcontains 'UBIC_2FA')) {
+            $MFACookie=$ErrorResponse.data.mfa_cookie
+            $cookie = New-Object System.Net.Cookie
+            $cookie.Name = "UBIC_2FA"
+            $cookie.Value = $MFACookie
+            $cookie.Domain = $Domain
+            $Script:Session.Cookies.Add($cookie);
+        }
+        # If the error indicates a MFA token is required, ask for the MFA token.
+        if ($ErrorResponse.meta.msg -match 'Ubic2faTokenRequired') {
+
+            
+            write-verbose "Unifi 2FA required."
+            $params = @{
+                username = $script:credentials.GetNetworkCredential().UserName
+                password = $script:credentials.GetNetworkCredential().password
+                ubic_2fa_token = Read-Host -Prompt "Unfi 2FA for $($script:credentials.GetNetworkCredential().UserName)"
+            }
+            $body = New-UnifiCommand $params
+            $results = Invoke-Restmethod -Uri $LoginURI -method post -body $body -ContentType "application/json; charset=utf-8"  -WebSession $Script:Session -TimeoutSec 600
+            write-verbose $Script:Session.Cookies.count
+            $global:logonresults=$results
+            if ($results.meta.rc -eq "ok") {
+                if (!$refresh){
+                    Write-Verbose "Successfully connected to Unifi controller."
+
+                }
+                else {
+                    Write-Verbose "Successfully reconnected to Unifi controller."
+                }
+            }
+        }
+        else {
+            $APIerror = "API Connection Error: $($_.Exception.Message)"
+            $APIerror
+            $Global:APIError=$_
+        }
+
     }
+    $Global:WebSession = $Script:Session
     <#
         .SYNOPSIS
         Connects to the Unifi controller.

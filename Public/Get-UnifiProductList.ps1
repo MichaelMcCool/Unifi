@@ -54,13 +54,22 @@ function Get-UnifiProductList {
         $Data.substring($start,$Rellength)
     }
 
+    # The product list data entry is different under different Unifi controller versions.
+    $UnifiVersion=(Get-UnifiStatus).server_version
     $ControllerName=Get-UnifiControllerName
+
     $URI = "$controller/manage/angular/$ControllerName/js/app.js"
     $WebResults=(Invoke-GetRestAPICall $URI)
 
     $Webresults | out-file -FilePath "$env:TEMP\Webresults.txt"
+    switch ($UnifiVersion){
+        # This part contains the regex code to extract the product list data from the javascript code.
+        "5.13.32"   {
+            $FullRegex='(?<={1:\[function\(e,t,n\)\{t\.exports=\{).*(?=,\{\}\],2:\[function\(e,t,n\))'
+        }
+    }
 
-    $FullRegex='(?<={1:\[function\(e,t,n\)\{t\.exports=\{).*(?=,\{\}\],2:\[function\(e,t,n\))'
+    
     $TempData = Get-content "$env:TEMP\webresults.txt"  -raw 
     Remove-Item -Path "$env:TEMP\Webresults.txt"
     [void]($tempData -match $FullRegex)

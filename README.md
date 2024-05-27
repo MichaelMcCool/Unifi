@@ -31,6 +31,7 @@ The following code will provide the necessary data and commands to setup the con
     Connect-UnifiController -ControllerURL $Controller -credentials $Credentials
 
 *Note: After the initial connection, the module will automatically refresh the connection as needed.*
+*Note: The module now supports Unifi 2FA, however, you will be prompted for 2FA any time the credentials need to be refreshed.*
 
 To end the session and disconnect from the controller:
 
@@ -46,7 +47,7 @@ Retrieve a list of all sites.
 
     Get-UnifiSite
     
-Retrieve a list of all products supported by the controller.
+Retrieve a list of all products supported by the controller. (This is not functional on controller versions newer than 5.x at the moment.)
 
     Get-UnifiProductList
     

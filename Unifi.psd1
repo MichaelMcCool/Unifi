@@ -5,7 +5,7 @@
     RootModule = 'Unifi.psm1'
     
     # Version number of this module.
-    ModuleVersion = '1.0.4'
+    ModuleVersion = '1.0.6'
     
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -87,6 +87,7 @@
         'Get-UnifiSiteRadiusProfile',
         'Get-UnifiSiteWirelessRFChannel',
         'Get-UnifiSiteSetting',
+        'Get-UnifiSiteStatistic',
         'Get-UnifiStatus',
         'Get-UnifiSiteDevice',
         'Get-UnifiSiteRouting',

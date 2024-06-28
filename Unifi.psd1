@@ -5,7 +5,7 @@
     RootModule = 'Unifi.psm1'
     
     # Version number of this module.
-    ModuleVersion = '1.0.6'
+    ModuleVersion = '1.0.7'
     
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -103,6 +103,7 @@
         'Get-UnifiProductList',
         'Grant-UnifiSuperAdmin',
         'New-UnifiSiteAdmin',
+        'New-UnifiSiteFirewallRule',
         'Remove-UnifiAdmin',
         'Remove-UnifiSiteAdmin',
         'Revoke-UnifiSuperAdmin',
